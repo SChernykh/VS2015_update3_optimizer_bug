@@ -25,7 +25,7 @@ void ParallelPrimeSieve::sieveInternal(uint64_t threadInterval)
 	uint64_t threadStop = start_ + threadInterval;
 
 	printf("threadStop = %llu (expected 11001)\r\n", threadStop);
-	threadStop = align(threadStop);
+	threadStop = align(threadStop); // !!! The bug is here !!!
 	printf("threadStop = %llu (expected 11012)\r\n\r\n", threadStop);
 
 	PrimeSieveTest ps;
