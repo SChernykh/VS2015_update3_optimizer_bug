@@ -11,11 +11,12 @@ This bug breaks primesieve with VS2015 update 3
 
 Update: it seems the computation is correct, but the result is not saved anywhere, and printf prints garbage.
 
-	printf("threadStop = %llu (expected 11001)\r\n", threadStop);
+printf("threadStop = %llu (expected 11001)\r\n", threadStop);
 000000013FCE108C  mov         rdx,rdi  
 000000013FCE108F  lea         rcx,[string "threadStop = %llu (expected 11001"... (013FCE2228h)]  
 000000013FCE1096  call        printf (013FCE1130h)  
-	threadStop = align(threadStop); // !!! The bug is here !!!
+
+threadStop = align(threadStop); // !!! The bug is here !!!
 000000013FCE109B  cmp         rdi,qword ptr [rbx]  
 000000013FCE109E  je          ParallelPrimeSieve::sieveInternal+69h (013FCE10C9h)  
 000000013FCE10A0  mov         rax,8888888888888889h  
@@ -28,7 +29,8 @@ Update: it seems the computation is correct, but the result is not saved anywher
 000000013FCE10C2  cmp         qword ptr [rcx],rax  
 000000013FCE10C5  cmovb       rbx,rcx  
 000000013FCE10C9  mov         rbx,qword ptr [rbx]  
-	printf("threadStop = %llu (expected 11012)\r\n\r\n", threadStop);
+
+printf("threadStop = %llu (expected 11012)\r\n\r\n", threadStop);
 000000013FCE10CC  mov         rdx,rbx  
 000000013FCE10CF  lea         rcx,[string "threadStop = %llu (expected 11012"... (013FCE2250h)]  
 000000013FCE10D6  call        printf (013FCE1130h)  
